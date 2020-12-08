@@ -1,0 +1,2 @@
+ncs-netsim create-network $NCS_DIR/packages/neds/cisco-ios 3 c
+ncs-setup --netsim-dir ./netsim --dest .
