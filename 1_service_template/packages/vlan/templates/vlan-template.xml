@@ -6,7 +6,7 @@
       <config>
         <vlan xmlns="urn:ios">
           <vlan-list tags="merge">
-            <id>{../vlan-id}</id>
+            <id>{/vlan-id}</id>
           </vlan-list>
         </vlan>
         <interface xmlns="urn:ios">
@@ -17,7 +17,7 @@
                 <trunk>
                   <allowed>
                     <vlan tags="merge">
-                      <vlans>{../vlan-id}</vlans>
+                      <vlans>{/vlan-id}</vlans>
                     </vlan>
                   </allowed>
                 </trunk>
@@ -31,7 +31,7 @@
                 <trunk>
                   <allowed>
                     <vlan tags="merge">
-                      <vlans>{../vlan-id}</vlans>
+                      <vlans>{/vlan-id}</vlans>
                     </vlan>
                   </allowed>
                 </trunk>
@@ -45,7 +45,7 @@
                 <trunk>
                   <allowed>
                     <vlan tags="merge">
-                      <vlans>{../vlan-id}</vlans>
+                      <vlans>{/vlan-id}</vlans>
                     </vlan>
                   </allowed>
                 </trunk>
