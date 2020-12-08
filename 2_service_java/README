@@ -1,0 +1,20 @@
+ncs-netsim create-network $NCS_DIR/packages/neds/cisco-ios 3 c
+ncs-setup --netsim-dir ./netsim --dest .
+
+cd packages
+ncs-make-package --service-skeleton java vlan
+<edit vlan.yang>
+cd packages/vlan/src; make
+
+ncs-netsim start
+ncs --with-package-reload
+
+ncs_cli -C -u admin
+devices sync-from
+config
+services vlan net-0 vlan-id 1234 device-if c0 interface 1/0
+end
+no services vlan net-0
+
+<edit vlanRFS.java>
+<repeat>
