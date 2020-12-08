@@ -14,3 +14,7 @@ devices sync-from
 config
 services vlan net-0 vlan-id 1234 \
     device-if c0 interface-type FastEthernet interface 1/0
+
+<edit vlan-template.xml>
+
+

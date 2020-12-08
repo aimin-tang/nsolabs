@@ -2,20 +2,59 @@
                  servicepoint="vlan">
   <devices xmlns="http://tail-f.com/ns/ncs">
     <device>
-      <!--
-          Select the devices from some data structure in the service
-          model. In this skeleton the devices are specified in a leaf-list.
-          Select all devices in that leaf-list:
-      -->
-      <name>{/device}</name>
+      <name>{/device-if/device-name}</name>
       <config>
-        <!--
-            Add device-specific parameters here.
-            In this skeleton the service has a leaf "dummy"; use that
-            to set something on the device e.g.:
-            <ip-address-on-device>{/dummy}</ip-address-on-device>
-        -->
+        <vlan xmlns="urn:ios">
+          <vlan-list tags="merge">
+            <id>{../vlan-id}</id>
+          </vlan-list>
+        </vlan>
+        <interface xmlns="urn:ios">
+          <?if {interface-type='FastEthernet'}?>
+            <FastEthernet tags="nocreate">
+              <name>{interface}</name>
+              <switchport>
+                <trunk>
+                  <allowed>
+                    <vlan tags="merge">
+                      <vlans>{../vlan-id}</vlans>
+                    </vlan>
+                  </allowed>
+                </trunk>
+              </switchport>
+            </FastEthernet>
+          <?end?>
+          <?if {interface-type='GigabitEthernet'}?>
+            <GigabitEthernet tags="nocreate">
+              <name>{interface}</name>
+              <switchport>
+                <trunk>
+                  <allowed>
+                    <vlan tags="merge">
+                      <vlans>{../vlan-id}</vlans>
+                    </vlan>
+                  </allowed>
+                </trunk>
+              </switchport>
+            </GigabitEthernet>
+          <?end?>
+          <?if {interface-type='TenGigabitEthernet'}?>
+            <TenGigabitEthernet tags="nocreate">
+              <name>{interface}</name>
+              <switchport>
+                <trunk>
+                  <allowed>
+                    <vlan tags="merge">
+                      <vlans>{../vlan-id}</vlans>
+                    </vlan>
+                  </allowed>
+                </trunk>
+              </switchport>
+            </TenGigabitEthernet>
+          <?end?>
+        </interface>
       </config>
     </device>
   </devices>
 </config-template>
+
