@@ -32,4 +32,4 @@ ncs-cdb/
 logs/
 scripts/
 state/
-
+storedstate
