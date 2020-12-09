@@ -70,6 +70,8 @@ public class vlanRFS {
             for (NavuContainer intf: interfaces.elements()) {
                 NavuLeaf deviceLeaf = intf.leaf("device-name");
                 String feIntfName = intf.leaf("interface").valueAsString();
+                ConfUInt32 vlanID = (ConfUInt32)service.leaf("vlan-id").value();
+                ConfUInt16 vlanID16 = new ConfUInt16(vlanID.longValue());
 
                 NavuContainer device = (NavuContainer)deviceLeaf.deref().get(0).getParent();
                 device.container("config").container("ios", "vlan").list("vlan-list").sharedCreate(vlanString);
@@ -77,6 +79,19 @@ public class vlanRFS {
                 if (!feIntfList.containsNode(feIntfName)) {
                     throw new DpCallbackException("Can not find FastEthernet interface: " + feIntfName);
                 }
+                NavuNode theIf = feIntfList.elem(feIntfName);
+                theIf.container("switchport").
+                        sharedCreate().
+                        container("mode").
+                        container("trunk").
+                        sharedCreate();
+                // Create the VLAN leaf-list element
+                theIf.container("switchport").
+                        container("trunk").
+                        container("allowed").
+                        container("vlan").
+                        leafList("vlans").
+                        sharedCreate(vlanID16);
             }
 
         } catch (NavuException e) {
