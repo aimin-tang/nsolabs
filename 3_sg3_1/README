@@ -1,7 +1,7 @@
 ncs-make-package --service-skeleton template loopback
 
-ncs-netsim create-network /Users/aimintang/Projects/nso/nso-4.7.8/packages/neds/cisco-ios 1 c /Users/aimintang/Projects/nso/nso-4.7.8/packages/neds/cisco-iosxr 1 x
-ncs-netsim create-network /Users/aimintang/Projects/nso/nso-4.7.8/packages/neds/cisco-ios 1 c /Users/aimintang/Projects/nso/nso-4.7.8/packages/neds/cisco-ios 1 c
+ncs-netsim create-network /Users/aimintang/Projects/nso/nso-4.7.8/packages/neds/cisco-ios 1 c
+ncs-netsim add-to-network /Users/aimintang/Projects/nso/nso-4.7.8/packages/neds/cisco-iosxr 1 x
 ncs-netsim start
 ncs-setup --netsim-dir netsim --dest .
 ncs
@@ -12,4 +12,6 @@ modify loopback/templates/loopback-template.xml
 modify loopback/src/yang/loopback.yang
 
 (ncs) packages reload
-(conf) services loopback l1 loopback-intf 1111 device c0 ip-address 10.111.1.1
+(conf) services loopback l1 loopback-intf 1111 device c0 ip-address 10.111.1.1  # create
+(conf) services loopback l1 loopback-intf 1122 device c0 ip-address 10.111.1.1  # change
+(conf) no services loopback l1  # delete

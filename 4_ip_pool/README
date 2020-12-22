@@ -1,0 +1,19 @@
+1) Create a RFS to configure the followings on a specified cisco-staros device
+
+Under devices device <specified device name> config staros:context <specified context name>, configure:
+
+• IPv4 Privte Pool
+ip pool <ip-pool-name> <ip-pool-subnet> <ip-pool-subnet-mask> private 0 srp-activate group-name <pool-group-name>
+  alert-threshold group-available 20 clear 25
+• 3G NAT Pool
+ip pool <3G-NAT-Pool-Name> <ip-pool-subnet> <ip-pool-subnet-mask> napt-users-per-ip-address
+  <napt-users-per-ip-address > srp-activate group-name <3G NAT Pool Group Name> alert-threshold
+  pool-free 20 clear 25 on-demand max-chunks-per-user 10 port-chunk-size 32 nat-binding-timer <nat-binding-timer>
+• 4G NAT Pool
+ip pool <4G-NAT-Pool-Name> <ip-pool-subnet> <ip-pool-subnet-mask> napt-users-per-ip-address
+  <napt-users-per-ip-address > srp-activate group-name <4G-NAT-Pool-group-name> alert-threshold
+  pool-free 20 clear 25 on-demand max-chunks-per-user 10 port-chunk-size 32 nat-binding-timer <nat-binding-timer>
+
+Usage:
+ip-pool-rfs s1 device-name cs0 ip-pool p1 ip-pool-subnet 1.1.1.0 ip-pool-subnet-mask 255.255.255.0 pool-type ipv4 pool-group-name g1
+ip-pool-rfs s1 ip-pool p2 pool-type 3G-4G ip_pool_subnet 1.1.1.0 ip_pool_subnet_mask 255.255.255.0 pool-group-name g2 napt-users-per-ip-address 3 nat-binding-timer 5

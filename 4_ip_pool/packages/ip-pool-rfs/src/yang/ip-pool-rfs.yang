@@ -1,0 +1,71 @@
+module ip-pool-rfs {
+  namespace "http://com/testlab/ip-pool-rfs";
+  prefix ip-pool-rfs;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import tailf-common {
+    prefix tailf;
+  }
+  import tailf-ncs {
+    prefix ncs;
+  }
+
+  list ip-pool-rfs {
+    key context-name;
+
+    uses ncs:service-data;
+    ncs:servicepoint "ip-pool-spnt";
+
+    leaf context-name {
+      type string;
+    }
+
+    leaf device-name {
+      type leafref {
+        path "/ncs:devices/ncs:device/ncs:name";
+      }
+      mandatory true;
+    }
+
+    list ip-pool {
+      key ip-pool-name;
+
+      leaf ip-pool-name {
+        type string;
+      }
+
+      leaf pool-type {
+        type enumeration {
+          enum ipv4;
+          enum 3G-4G;
+        }
+        mandatory true;
+      }
+
+      leaf ip-pool-subnet {
+        type string;
+        mandatory true;
+      }
+
+      leaf ip-pool-subnet-mask {
+        type string;
+        mandatory true;
+      }
+
+      leaf pool-group-name {
+        type string;
+        mandatory true;
+      }
+
+      leaf napt-users-per-ip-address {
+        type string;
+      }
+
+      leaf nat-binding-timer {
+        type string;
+      }
+    }
+  }
+}

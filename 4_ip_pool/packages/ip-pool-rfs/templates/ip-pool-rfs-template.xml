@@ -1,0 +1,39 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0"
+                 servicepoint="ip-pool-spnt">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+    <device>
+      <name>{device-name}</name>
+      <config>
+        <context xmlns="http://tail-f.com/ned/cisco-staros">
+          <name>{context-name}</name>
+          <ip>
+            <pool>
+              <?foreach {ip-pool}?>
+              <name>{ip-pool-name}</name>
+              <ip-address>{ip-pool-subnet}</ip-address>
+              <subnet-mask>{ip-pool-subnet-mask}</subnet-mask>
+              <pool-type>private</pool-type>
+              <pool-priority>0</pool-priority>
+              <srp-activate/>
+              <group-name>{pool-group-name}</group-name>
+              <alert-threshold/>
+              <group-available>20</group-available>
+              <clear>25</clear>
+              <?end?>
+            </pool>
+          </ip>
+        </context>
+        <context xmlns="http://tail-f.com/ned/cisco-staros">
+          <name>local</name>
+          <ip>
+          </ip>
+        </context>
+        <context xmlns="http://tail-f.com/ned/cisco-staros">
+          <name>test</name>
+          <ip>
+          </ip>
+        </context>
+      </config>
+    </device>
+  </devices>
+</config-template>
