@@ -7,8 +7,9 @@
         <context xmlns="http://tail-f.com/ned/cisco-staros">
           <name>{context-name}</name>
           <ip>
+            <?foreach {ip-pool}?>
+            <?if {pool-type='ipv4'}?>
             <pool>
-              <?foreach {ip-pool}?>
               <name>{ip-pool-name}</name>
               <ip-address>{ip-pool-subnet}</ip-address>
               <subnet-mask>{ip-pool-subnet-mask}</subnet-mask>
@@ -19,18 +20,26 @@
               <alert-threshold/>
               <group-available>20</group-available>
               <clear>25</clear>
-              <?end?>
             </pool>
-          </ip>
-        </context>
-        <context xmlns="http://tail-f.com/ned/cisco-staros">
-          <name>local</name>
-          <ip>
-          </ip>
-        </context>
-        <context xmlns="http://tail-f.com/ned/cisco-staros">
-          <name>test</name>
-          <ip>
+            <?end?>
+            <?if {pool-type='3G-4G'}?>
+            <pool>
+              <name>{ip-pool-name}</name>
+              <ip-address>{ip-pool-subnet}</ip-address>
+              <subnet-mask>{ip-pool-subnet-mask}</subnet-mask>
+              <napt-users-per-ip-address>{napt-users-per-ip-address}</napt-users-per-ip-address>
+              <srp-activate/>
+              <group-name>{pool-group-name}</group-name>
+              <alert-threshold/>
+              <pool-free>20</pool-free>
+              <clear>25</clear>
+              <on-demand/>
+              <max-chunks-per-user>10</max-chunks-per-user>
+              <port-chunk-size>32</port-chunk-size>
+              <nat-binding-timer>{nat-binding-timer}</nat-binding-timer>
+            </pool>
+            <?end?>
+            <?end?>
           </ip>
         </context>
       </config>

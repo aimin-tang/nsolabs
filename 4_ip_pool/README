@@ -16,4 +16,5 @@ ip pool <4G-NAT-Pool-Name> <ip-pool-subnet> <ip-pool-subnet-mask> napt-users-per
 
 Usage:
 ip-pool-rfs s1 device-name cs0 ip-pool p1 ip-pool-subnet 1.1.1.0 ip-pool-subnet-mask 255.255.255.0 pool-type ipv4 pool-group-name g1
-ip-pool-rfs s1 ip-pool p2 pool-type 3G-4G ip_pool_subnet 1.1.1.0 ip_pool_subnet_mask 255.255.255.0 pool-group-name g2 napt-users-per-ip-address 3 nat-binding-timer 5
+ip-pool-rfs s1 device-name cs0 ip-pool p2 ip-pool-subnet 2.2.2.0 ip-pool-subnet-mask 255.255.255.0 pool-type ipv4 pool-group-name g2
+ip-pool-rfs s1 device-name cs0 ip-pool p3 pool-type 3G-4G ip-pool-subnet 1.1.1.0 ip-pool-subnet-mask 255.255.255.0 pool-group-name g2 napt-users-per-ip-address 3 nat-binding-timer 5

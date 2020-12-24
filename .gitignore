@@ -30,6 +30,11 @@ hs_err_pid*
 netsim/
 ncs-cdb/
 logs/
+load-dir/
+private-jar/
+shared-jar/
 scripts/
 state/
 storedstate
+*.fxs
+*.iml
