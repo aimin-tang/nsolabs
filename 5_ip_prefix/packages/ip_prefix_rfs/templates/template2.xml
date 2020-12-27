@@ -7,11 +7,10 @@
           <prefix-list>
             <prefixes>
               <name>{$IP_PREFIX_NAME}</name>
-              <description>{$DESC}</description>
               <seq>
-                <no>5</no>
-                <permit>1.1.1.1/32</permit>
-                <le>32</le>
+                <no>{$SEQ}</no>
+                <permit>{$PERMIT}</permit>
+                <le>{$LE}</le>
               </seq>
             </prefixes>
           </prefix-list>

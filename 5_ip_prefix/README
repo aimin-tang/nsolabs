@@ -1,6 +1,6 @@
 Directory structure:
 ====================
-mkdir 5_ip_prefix
+mkdir 5-ip-prefix
 mkdir packages 
 cd packages/
 ln -s ~/Projects/nso/neds/cisco-nx .
@@ -8,12 +8,12 @@ cd ..
 ncs-netsim create-network ./packages/cisco-nx 1 c
 ncs-setup --netsim-dir ./netsim --dest .
 cd packages/
-ncs-make-package --service-skeleton python-and-template ip_prefix_rfs
+ncs-make-package --service-skeleton python-and-template ip-prefix-rfs
 
 service code:
 =============
-cd ip_prefix_rfs/src
-< modify yang/ip_prefix_rfs.yang >
+cd ip-prefix-rfs/src
+< modify yang/ip-prefix-rfs.yang >
 make
 
 template:
@@ -22,15 +22,14 @@ template:
 
 Use service:
 ============
-no ip_prefix_rfs l1
+no ip-prefix-rfs l1
 exit
 yes
 packages reload
 show packages package oper
 config
-ip_prefix_rfs l1 description d1 device c0 prefix_entry permit 1.1.1.1/32 
-top
-ip_prefix_rfs l1 description d1 device c0 prefix_entry permit 2.2.2.2/24 prefix_length_op le prefix_length 24
+ip-prefix-rfs l1 description d1 device c0
+prefix-entry permit 1.1.1.1/32 op-verb le op-length 32
 top
 commit dry-run outformat cli
 

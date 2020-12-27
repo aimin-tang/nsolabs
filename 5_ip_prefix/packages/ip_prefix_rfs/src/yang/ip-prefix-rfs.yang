@@ -46,14 +46,31 @@ module ip-prefix-rfs {
     }
 
     list prefix-entry {
-      key subnet-mask;
+      key "sm-verb subnet-mask";
+
+      leaf sm-verb {
+        type enumeration {
+          enum permit;
+          enum deny;
+        }
+      }
 
       leaf subnet-mask {
         type string;
       }
 
-      leaf op {
-        type string;
+      leaf op-verb {
+        type enumeration {
+          enum le;
+          enum gt;
+          enum eq;
+        }
+      }
+
+      leaf op-length {
+        type uint8 {
+          range "0..32";
+        }
       }
     }
   }
